@@ -93,6 +93,27 @@ public class Exercise07_StoreHours {
     isStoreOpen(9, 'S', true) ➔ true
      */
     public boolean isStoreOpen(int currentHour, char currentDay, boolean isSummer) {
-        return false;
+        boolean storeStatus = false;
+        boolean isNotSummer = false;
+        int notWedOrSatOpen = 8;
+        int notWedOrSatClose = 17;
+        int saturdayOpen = 9;
+        int saturdayClose = 15;
+        int wedHoursClose = 20;
+
+        if((currentDay == 'M' || currentDay == 'W' || currentDay == 'F') && (currentHour < 17 && currentHour >= 8)){
+            storeStatus = true;
+        }
+        else if((isSummer == true) && ( 'W' == currentDay) && (currentHour < 20 && currentHour >= 8 )){
+            storeStatus = true;
+        }
+        else if((isSummer = true) && ( 'S' == currentDay) && (currentHour < 15 && currentHour >= 9)) {
+            storeStatus = true;
+        }
+
+        return storeStatus;
+
+
+
     }
 }
