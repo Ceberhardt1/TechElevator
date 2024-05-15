@@ -24,7 +24,13 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50) ➔ false
      */
     public boolean acceptPackage(int weightPounds) {
-        return false;
+        if(weightPounds > MAX_WEIGHT_POUNDS){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 
     /*
@@ -41,7 +47,33 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 36, 24, 12) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches) {
-        return false;
+        boolean weightOk = false;
+        boolean volumeOk = false;
+        boolean shippingAccepted = false;
+
+        if(weightPounds <= MAX_WEIGHT_POUNDS){
+            weightOk = true;
+        }
+        else{
+            weightOk = false;
+        }
+
+        if(lengthInches * widthInches * heightInches <= MAX_CUBIC_INCHES){
+            volumeOk = true;
+
+        }
+        else{
+            volumeOk = false;
+        }
+
+        if(weightOk && volumeOk){
+            shippingAccepted = true;
+        }
+        else{
+            shippingAccepted = false;
+        }
+        return shippingAccepted;
+
     }
 
     /*
@@ -61,6 +93,41 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 36, 24, 12) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches, boolean isSurchargePaid) {
-        return false;
+        boolean weightOk = false;
+        boolean volumeOk = false;
+        boolean shippingAccepted = false;
+
+        if (weightPounds <= MAX_WEIGHT_POUNDS) {
+            weightOk = true;
+        } else {
+            weightOk = false;
+        }
+        if(widthInches > MAX_DIMENSION_INCHES || heightInches > MAX_DIMENSION_INCHES || lengthInches > MAX_DIMENSION_INCHES){
+            if(isSurchargePaid){
+               volumeOk = true;
+            }
+            else{
+                volumeOk = false;
+            }
+        }
+        else{
+            if(lengthInches * widthInches * heightInches <= MAX_CUBIC_INCHES){
+                volumeOk = true;
+
+            }
+            else{
+                volumeOk = false;
+            }
+        }
+
+        if(weightOk && volumeOk){
+            shippingAccepted = true;
+        }
+        else{
+            shippingAccepted = false;
+        }
+
+        return shippingAccepted;
+
     }
 }
