@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.lang.reflect.Array;
+import java.util.Calendar;
+
 public class Exercise01_StoreOrders {
 
     /*
@@ -43,7 +46,7 @@ public class Exercise01_StoreOrders {
 	 createOrder() → [10, 40, 31, 41]
      */
     public int[] createOrder() {
-        return new int[] {};
+        return new int[] {SMALL_CHEESE, CALZONE, LARGE_PEPPERONI, SPAGHETTI_PIE };
     }
 
     /*
@@ -60,8 +63,15 @@ public class Exercise01_StoreOrders {
     getCalzoneSales([LARGE_CHEESE, LARGE_PEPPERONI, SMALL_CHEESE]) → 0
     getCalzoneSales([]) → 0
      */
+    int numOfCalzones = 0;
     public int getCalzoneSales(int[] orders) {
-        return 0;
+        int calzoneCounter = 0;
+           for(int i = 0; i < orders.length; i++){
+                if(orders[i] == CALZONE){
+                    calzoneCounter += 1;
+                }
+           }
+           return calzoneCounter;
     }
 
     /*
@@ -79,6 +89,20 @@ public class Exercise01_StoreOrders {
     getCheesePizzaRevenue([SMALL_PEPPERONI, MEDIUM_PEPPERONI]) → 0
      */
     public int getCheesePizzaRevenue(int[] orders) {
-        return 0;
+        int revenuePizza = 0;
+        for(int i = 0; i < orders.length; i++){
+            if(orders[i] == SMALL_CHEESE){
+                revenuePizza += 8;
+            }
+            else if(orders[i] == MEDIUM_CHEESE){
+                revenuePizza += 11;
+            }
+            else if(orders[i] == LARGE_CHEESE){
+                revenuePizza += 14;
+            }
+        }
+        return revenuePizza;
+
+
     }
 }
