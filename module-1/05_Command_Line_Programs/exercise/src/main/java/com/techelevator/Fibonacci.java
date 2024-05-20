@@ -10,6 +10,7 @@ public class Fibonacci {
 		int maxNum = fibonacci.nextInt();
 
 		String zero = "0";
+		String zeroTwo = "0, 1";
 // ------------------------------------------------------------ This section is good!-----------------------------------
 		int numOne = 0;
 		int numTwo = 1;
@@ -18,14 +19,24 @@ public class Fibonacci {
 // -------------------------------------------------------------Defining the numbers and the sum -----------------------
 //		String starterNum = ("0, ");
 // -------------------------------------------------------------Storing the starting numbers into a value---------------
-		while(result <= maxNum){
-			result = numOne + numTwo;
-			numOne = numTwo;
-			numTwo = result;
-
-			zero += "," + numOne;
+		if(maxNum <= 0 ){
+			System.out.print(zeroTwo);
 		}
-		System.out.print(zero);
+		else{
+			while(result <= maxNum){
+				result = numOne + numTwo;
+				numOne = numTwo;
+				numTwo = result;
+
+				zero += "," + numOne;
+
+			}
+			System.out.print(zero);
+		}
+
+
+
+
 
 	}
 //-------------------------------------------------------------Creating a while loop to loop through the set of numbers,
