@@ -95,9 +95,9 @@ public class Exercises {
 
 		int large = integerList.get(0);
 
-		for (int i = 0; i < integerList.size(); i++) {
+		for (int i = 1; i < integerList.size(); i++) {
 			int largest = integerList.get(i);
-			if(large > largest){
+			if(largest > large){
 				large = largest;
 			}
 		}
@@ -198,13 +198,12 @@ public class Exercises {
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
 
-//		for (int i = 0; i < listOne.size(); i++) {
-//			if (listOne.get(i)){
-//
-//			}
-//		}{
-//
-//		}
+		List<Integer> newList = new ArrayList<>();
+
+		int one = listOne.size();
+		int two = listTwo.size();
+
+		
 
 
 		return null;
