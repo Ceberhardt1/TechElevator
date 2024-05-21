@@ -328,13 +328,24 @@ public class Exercises {
 	 hasBad("xxbadxx") → false
 	 */
 	public boolean hasBad(String str) {
-		String start = str.substring(0,3);
-		String end = str.substring(0,2);
+		boolean hasIt = false;
 
-		if(start.equals(end)){
-			return true;
+		if(str.length() < 3){
+			hasIt = false;
+
 		}
-		return false;
+		else if(str.equalsIgnoreCase("bad")){
+			hasIt = true;
+		}
+		else{
+			String badZero = str.substring(0, 3);
+			String badOne = str.substring(1, 4);
+
+			if(badZero.equalsIgnoreCase("bad") || badOne.equalsIgnoreCase("bad")){
+				hasIt = true;
+			}
+		}
+		return hasIt;
 	}
 
 	/*
@@ -361,7 +372,7 @@ public class Exercises {
 	 frontTimes("Abc", 3) → "AbcAbcAbc"
 	 */
 	public String frontTimes(String str, int n) {
-		String times = str.substring();
+		String times = str.substring(n);
 
 		String front = times.repeat(n);
 
