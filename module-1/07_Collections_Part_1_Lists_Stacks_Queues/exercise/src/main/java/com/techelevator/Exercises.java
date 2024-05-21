@@ -198,13 +198,13 @@ public class Exercises {
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
 
-		for (int i = 0; i < listOne.size(); i++) {
-			if (listOne.get(i)){
-
-			}
-		}{
-
-		}
+//		for (int i = 0; i < listOne.size(); i++) {
+//			if (listOne.get(i)){
+//
+//			}
+//		}{
+//
+//		}
 
 
 		return null;
