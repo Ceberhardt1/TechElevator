@@ -292,8 +292,8 @@ public class Exercises {
 	 */
 	public String twoChar(String str, int n) {
 
-		if(n > 2){
-
+		if(n <= str.length() && n >= str.length()){
+			return str;
 		}
 		else{
 			return null;
