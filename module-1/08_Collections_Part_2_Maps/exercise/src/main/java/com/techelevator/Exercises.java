@@ -258,24 +258,20 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
-		Map<String, Integer> everything = new HashMap<>();
+		Map<String, Integer> inventoryWarehouse = new HashMap<>();
 
-		for(Map.Entry<String, Integer> firstEntry : mainWarehouse.entrySet()){
-			everything.put(firstEntry.getKey(), firstEntry.getValue());
+		for(Map.Entry<String, Integer> entry : mainWarehouse.entrySet()){
+			inventoryWarehouse.put(entry.getKey(), entry.getValue());
 		}
 		for(Map.Entry<String, Integer> secondEntry : remoteWarehouse.entrySet()){
-			everything.put(secondEntry.getKey(), secondEntry.getValue());
-
-			if (!everything.containsKey(secondEntry.getKey())){
-				everything.put(secondEntry.getKey(), secondEntry.getValue());
+			if (!inventoryWarehouse.containsKey(secondEntry.getKey())){
+				inventoryWarehouse.put(secondEntry.getKey(), secondEntry.getValue());
 			}
-			else if(everything.containsKey(secondEntry.getKey())) {
-				everything.put(secondEntry.getKey(), secondEntry.getValue() + everything.get(secondEntry.getKey()));
+			else if(inventoryWarehouse.containsKey(secondEntry.getKey())) {
+				inventoryWarehouse.put(secondEntry.getKey(), secondEntry.getValue() + inventoryWarehouse.get(secondEntry.getKey()));
 			}
-
-
 		}
-		return everything;
+		return inventoryWarehouse;
 	}
 
 	/*
