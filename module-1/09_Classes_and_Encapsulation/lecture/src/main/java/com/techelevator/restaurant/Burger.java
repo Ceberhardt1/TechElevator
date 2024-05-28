@@ -1,5 +1,8 @@
 package com.techelevator.restaurant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Burger {
 
     //Class variables go here//
@@ -9,7 +12,7 @@ public class Burger {
 
     private String meatType;
 
-    //TODO - COMEBACK LATER AND ADD INGREDIENTS LIST<>//
+   private List<Ingredient> toppings = new ArrayList<>();
 
     //Constructor //
 
@@ -17,12 +20,23 @@ public class Burger {
         this.meatType = meatType;
     }
 //-------------default Constructor//-------------
-    public Burger(){
+    public Burger(String meatType, List<Ingredient> toppings){
+        if(toppings == null){
+            this.toppings = new ArrayList<>();
+        }
+        else{
+            this.toppings = toppings;
+        }
+
+        this.meatType = meatType;
 
     }
 //---------------------------------------------------
     //Public Methods//
 
+    public void addIngredient(Ingredient ingredient){
+        toppings.add(ingredient);
+    }
 
 
     //Private Methods//
@@ -48,5 +62,7 @@ public class Burger {
         this.howCooked = howCooked;
     }
 
-
+    public List<Ingredient> getToppings() {
+        return toppings;
+    }
 }
