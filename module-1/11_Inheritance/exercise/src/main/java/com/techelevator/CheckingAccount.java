@@ -14,8 +14,14 @@ public class CheckingAccount extends BankAccount {
     public int withdraw(int amountToWithdraw){
         int overdraft = 10;
         int balance = getBalance();
-        if(getBalance() < 0 && getBalance() > -100){;
-            balance = super.withdraw(amountToWithdraw - overdraft);
+        int updatedBalance = balance - amountToWithdraw;
+
+        if(updatedBalance <= -100){
+            return balance;
+        }
+        else if(updatedBalance < 0){
+                int wAmount = amountToWithdraw + overdraft;
+                balance = super.withdraw(wAmount);
         }
         else{
             balance = super.withdraw(amountToWithdraw);
