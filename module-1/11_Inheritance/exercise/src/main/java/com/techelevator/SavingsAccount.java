@@ -15,12 +15,20 @@ public class SavingsAccount extends BankAccount {
     public int withdraw(int amountToWithdraw){
         int balance = getBalance();
         int addCharge = 2;
-        if(balance < 150){
-            super.withdraw(getBalance() - addCharge);
+        int updatedBalance = balance - amountToWithdraw;
+        int newlyUpdated = balance - amountToWithdraw - addCharge;
+
+        if(newlyUpdated < 0){
+            return balance;
+        } else if (updatedBalance  < 150) {
+            int wAmount = amountToWithdraw + addCharge;
+            balance = super.withdraw(wAmount);
+
         }
         else{
-            super.withdraw()
+            balance = super.withdraw(amountToWithdraw);
         }
+        return balance;
     }
 
 }
