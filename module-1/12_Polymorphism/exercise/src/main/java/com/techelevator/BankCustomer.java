@@ -22,9 +22,9 @@ public class BankCustomer{
         double totalBalance = 0;
 
         for(Accountable accountable: accounts){
-
+            totalBalance += accountable.getBalance();
         }
-        return 25000 >= totalBalance;
+        return 25000 <= totalBalance;
     }
 
 
