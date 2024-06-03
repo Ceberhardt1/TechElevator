@@ -12,4 +12,12 @@ public class SquareWall extends RectangleWall{
     public String toString() {
         return getName() + "(" + sideLength + "x" + sideLength + ")" + "square";
     }
+
+    public int getSideLength() {
+        return sideLength;
+    }
+
+    public void setSideLength(int sideLength) {
+        this.sideLength = sideLength;
+    }
 }
