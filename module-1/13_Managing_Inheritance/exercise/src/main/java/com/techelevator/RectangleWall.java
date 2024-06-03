@@ -12,7 +12,27 @@ public class RectangleWall extends Wall{
         this.length = length;
         this.height = height;
     }
+    public RectangleWall(String name, String color, int sideLength) {
+        super(name, color);
+        this.length = sideLength;
+        this.height = sideLength;
+    }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     @Override
     public String toString() {
