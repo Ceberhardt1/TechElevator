@@ -30,7 +30,7 @@ public class FinderTest {
     @Test
     public void largestValueWithOne(){
         List<Integer> lists = new ArrayList<>(7);
-        
+
     }
 
 
