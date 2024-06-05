@@ -200,13 +200,28 @@ public class Exercises {
 
 		List<Integer> newList = new ArrayList<>();
 
-		int one = listOne.size();
-		int two = listTwo.size();
+		int i = 0;
+		int j = 0;
+
+		while(i < listOne.size() && j < listTwo.size()){
+			newList.add(listOne.get(i));
+			newList.add(listTwo.get(j));
+			i++;
+			j++;
+		}
+
+		while(i < listOne.size()){
+			newList.add(listOne.get(i));
+			i++;
+		}
+
+		while(j < listTwo.size()){
+			newList.add(listTwo.get(j));
+			j++;
+		}
 
 
-
-
-		return null;
+		return newList;
 	}
 
 }
