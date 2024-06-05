@@ -1,8 +1,6 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class FindAndReplace {
@@ -66,6 +64,32 @@ public class FindAndReplace {
      * @throws IOException thrown if file could not be read, written, or other related error
      */
     public void writeReplacedTextFile(File sourceFile, File destinationFile, String searchTerm, String replacementTerm) throws IOException {
+
+
+
+        if(sourceFile.exists()){
+
+            try(Scanner fileScan = new Scanner(sourceFile)){
+                while(fileScan.hasNextLine()){
+
+                    String readLine = fileScan.nextLine();
+                    String replaceLine = readLine.replace(searchTerm, replacementTerm);
+
+                    try(FileWriter fileWriters = new FileWriter(destinationFile, true)){
+                        BufferedWriter buff = new BufferedWriter(fileWriters);
+                        buff.write(replaceLine);
+                        buff.newLine();
+                        buff.flush();
+                    }
+
+
+                }
+            }
+        }
+        else{
+            throw new IOException();
+        }
+
 
     }
 

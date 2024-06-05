@@ -61,7 +61,25 @@ public class FizzWriter {
      * @throws IOException thrown if file could not be read, written, or other related error
      */
     public void writeFizzBuzzFile(File destinationFile, int startNumber, int endNumber, String fizzValue, String buzzValue) throws IOException {
-
+        try(PrintWriter printsWriter = new PrintWriter(destinationFile)){
+            for (int i = startNumber; i <= endNumber; i++ ){
+                if (i % 3 == 0 && i % 5 == 0){
+                    printsWriter.println(fizzValue + buzzValue);
+                }
+                else if (i % 3 == 0) {
+                    printsWriter.println(fizzValue);
+                }
+                else if (i % 5 == 0) {
+                    printsWriter.println(buzzValue);
+                }
+                else{
+                    printsWriter.println(i);
+                }
+            }
+        }
+        catch (Exception e){
+            throw new IOException();
+        }
 	}
 
     /**
