@@ -16,6 +16,11 @@ public class Module1CodingAssessment {
 		Module1CodingAssessment mca = new Module1CodingAssessment();
 		mca.run();
 	}
+	private static void printMovieList(ArrayList<String>rentalObjects){
+		for(int i = 0; i < rentalObjects.size(); i++){
+			System.out.println(rentalObjects.get(i));
+		}
+	}
 
 	private void run() {
 
