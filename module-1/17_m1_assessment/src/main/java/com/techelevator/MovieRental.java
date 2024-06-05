@@ -16,5 +16,8 @@ public class MovieRental {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "MOVIE:" + title + "-" + "FORMAT: " + format + "-" + "PRICE " + rentalPrice;
+    }
 }
