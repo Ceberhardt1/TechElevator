@@ -6,15 +6,15 @@ import java.util.List;
 public class Module1CodingAssessment {
 
 
-	List<String> rentalObjects = new ArrayList<>();
-	String rentalOne = String.valueOf(rentalObjects.add("SuperBad"));
-	String rentalTwo = String.valueOf(rentalObjects.add("Hunger Games"));
-
-	String rentalThree = String.valueOf(rentalObjects.add("Spongebob Movie"));
 
 	public static void main(String[] args) {
 		Module1CodingAssessment mca = new Module1CodingAssessment();
 		mca.run();
+
+
+
+
+
 	}
 	private static void printMovieList(ArrayList<String>rentalObjects){
 		for(int i = 0; i < rentalObjects.size(); i++){
@@ -23,7 +23,8 @@ public class Module1CodingAssessment {
 	}
 
 	private void run() {
-
+		//The right way to do it.
+		MovieRental rentalOne = new MovieRental("SuperBad", "DVD", true);
            //start coding here... You will call other class or classes from here as needed, or write additional methods. 
 
 
