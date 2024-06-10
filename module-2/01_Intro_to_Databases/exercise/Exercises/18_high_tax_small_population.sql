@@ -2,3 +2,7 @@
 -- Order the results by name alphabetically.
 -- (17 rows)
 
+SELECT state_name, population, sales_tax
+From state
+Where sales_tax >= 7 or population < 1000000
+order by state_name asc;

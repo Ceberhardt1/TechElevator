@@ -2,3 +2,7 @@
 -- Order the results by sales tax (highest first), then state name alphabetically (A-Z).
 -- (26 rows)
 
+Select state_name, state_nickname, sales_tax
+From state
+Where census_region in ('West', 'South') and sales_tax != 0
+Order by sales_tax desc, state_name asc

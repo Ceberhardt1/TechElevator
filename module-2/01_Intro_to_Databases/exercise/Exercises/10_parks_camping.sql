@@ -2,3 +2,8 @@
 -- Order the results by area, largest first.
 -- (21 rows)
 
+Select park_name, area
+From park
+Where area <= 700 and has_camping = true
+Order by area desc
+
