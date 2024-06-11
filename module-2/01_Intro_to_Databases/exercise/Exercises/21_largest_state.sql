@@ -3,7 +3,7 @@
 
 Select state_name, state_nickname
 From state
-Order by population desc
+Order by area desc
 limit 1;
 
 
