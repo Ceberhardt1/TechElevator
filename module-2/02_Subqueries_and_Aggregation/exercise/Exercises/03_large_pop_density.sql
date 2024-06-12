@@ -3,3 +3,7 @@
 -- Order the results by population density, highest number first.
 -- (9 rows)
 
+Select city_name, population, area, population / area AS population_density
+from city
+Where population / area > 5000
+Order By population_density desc
