@@ -4,5 +4,7 @@
 
 SELECT title, release_date
 FROM movie
-WHERE actor_id = 'Tom Hanks'
-ORDER BY release_date;
+JOIN movie_actor ON movie.movie_id = movie_actor.movie_id
+JOIN person on movie_actor.actor_id = person.person_id
+WHERE person.person_name IN ('Tom Hanks')
+ORDER BY release_date desc;

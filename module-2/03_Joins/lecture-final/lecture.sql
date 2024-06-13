@@ -1,4 +1,4 @@
--- INNER JOIN
+ -- INNER JOIN
 
 -- Write a query to retrieve the name and state abbreviation for the 2 cities named "Columbus" in the database
 

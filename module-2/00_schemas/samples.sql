@@ -68,5 +68,17 @@ Order By state_abbreviation asc, city_name asc;
 
 
 
+Select * 
+From state
+
+
+SELECT Avg(population) As average_population
+FROM state
+WHERE census_region = 'West';
+
+SELECT sum(population) AS california_population
+FROM city
+WHERE state_name = 'California';
+
 
 
