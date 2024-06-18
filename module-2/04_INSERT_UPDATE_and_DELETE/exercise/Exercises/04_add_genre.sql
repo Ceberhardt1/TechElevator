@@ -3,4 +3,3 @@
 INSERT INTO genre(genre_name)
 VALUES ('Sports');
 
-INSERT
