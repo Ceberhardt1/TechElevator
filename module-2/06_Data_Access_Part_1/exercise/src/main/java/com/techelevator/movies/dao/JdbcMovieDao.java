@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,27 @@ public class JdbcMovieDao implements MovieDao {
     @Override
     public List<Movie> getMoviesByDirectorNameAndBetweenYears(String directorName, int startYear,
                                                               int endYear, boolean useWildCard) {
-        return null;
+        List<Movie> movies = new ArrayList<>();
+        String directorSearch = directorName;
+        if(useWildCard){
+            directorSearch = "%" + directorName + "%";
+        }
+        LocalDate startDate = LocalDate.of(startYear, 1, 1);
+        LocalDate endDate = LocalDate.of(endYear, 12,31);
+
+        String sql = "SELECT movie_id, title, overview, tagline, poster_path, movie.home_page, release_date, length_minutes, director_id, collection_id \n" +
+                "FROM movie " +
+                "JOIN person ON  movie.director_id = person_id " +
+                "WHERE person_name ILIKE ? AND release_date >= ? AND release_date <= ? " +
+                "ORDER BY release_date DESC;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, directorSearch, startDate, endDate);
+        while(results.next()){
+            movies.add(mapRowToMovie(results));
+        }
+        return movies;
+
+
+
     }
     private Movie mapRowToMovie(SqlRowSet rowSet){
         Movie movies= new Movie();

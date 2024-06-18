@@ -60,7 +60,19 @@ public class JdbcPersonDao implements PersonDao {
 
     @Override
     public List<Person> getPersonsByCollectionName(String collectionName, boolean useWildCard) {
-        return null;
+        List<Person> person = new ArrayList<>();
+
+        String sql = "SELECT person_id, person_name, birthday, deathday, biography, profile_path, home_page \n" +
+                "FROM person " +
+                "WHERE person_name ILIKE ?";
+        if(useWildCard){
+            collectionName = "%" + collectionName + "%";
+        }
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionName);
+        while(results.next()){
+            person.add(mapRowToPerson(results));
+        }
+        return person;
     }
     private Person mapRowToPerson(SqlRowSet rowSet){
         Person person = new Person();
