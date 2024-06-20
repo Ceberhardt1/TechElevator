@@ -30,11 +30,18 @@ public class JdbcEmployeeDao implements EmployeeDao {
 		Employee employee = null;
 		String sql = EMPLOYEE_SELECT +
 				" WHERE e.employee_id=?";
-
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-		if (results.next()) {
-			employee = mapRowToEmployee(results);
+		try{
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+			if (results.next()) {
+				employee = mapRowToEmployee(results);
+			}
 		}
+		catch(CannotGetJdbcConnectionException e){
+			throw new DaoException("Unable to connect to server or database", e);
+		}
+
+
+
 
 		return employee;
 	}
@@ -102,12 +109,11 @@ public class JdbcEmployeeDao implements EmployeeDao {
 	@Override
 	public Employee createEmployee(Employee employee) {
 		Employee newEmployee = null;
-		String sql = "INSERT INTO employee ( first_name, last_name, birth_date, hire_date) " +
-						"VALUES (?, ?, ? , ?) RETURNING employee_id;" ;
+		String sql = "INSERT INTO employee ( department_id, first_name, last_name, birth_date, hire_date) " +
+						"VALUES (?, ?, ? , ?, ?) RETURNING employee_id;" ;
 
 		try{
-			int newEmployeeId = jdbcTemplate.queryForObject(sql, int.class, employee.getFirstName(), employee.getLastName(),
-					employee.getDepartmentId(), employee.getBirthDate(), employee.getHireDate());
+			int newEmployeeId = jdbcTemplate.queryForObject(sql, int.class,employee.getDepartmentId(), employee.getFirstName(), employee.getLastName(), employee.getBirthDate(), employee.getHireDate());
 
 			newEmployee = getEmployeeById(newEmployeeId);
 		}
@@ -123,11 +129,11 @@ public class JdbcEmployeeDao implements EmployeeDao {
 	@Override
 	public Employee updateEmployee(Employee employee) {
 		Employee updatedEmployee = null;
-		String sql = "UPDATE employee SET first_name = ?, last_name = ?, birth_date = ?, hire_date = ? "  +
+		String sql = "UPDATE employee SET employee_id = ?, department_id = ?, first_name = ?, last_name = ?, birth_date = ?, hire_date = ? "  +
 		"WHERE employee_id = ?;"	;
 		try{
-			int numberOfRows = jdbcTemplate.update(sql, employee.getFirstName(),
-					employee.getLastName(), employee.getBirthDate(), (employee.getHireDate()));
+			int numberOfRows = jdbcTemplate.update(sql, employee.getId(), employee.getDepartmentId(), employee.getFirstName(),
+					employee.getLastName(), employee.getBirthDate(), (employee.getHireDate()), employee.getId());
 			if(numberOfRows == 0){
 				throw new DaoException("Zero rows affected, expected at least one");
 			}
@@ -148,9 +154,12 @@ public class JdbcEmployeeDao implements EmployeeDao {
 	@Override
 	public int deleteEmployeeById(int employeeId) {
 		int numberOfRows = 0;
-		String sql = "DELETE FROM employee WHERE employee_id = ?;";
+		String sql = "DELETE FROM project_employee WHERE employee_id = ?;";
+		String sql2 = "DELETE FROM employee WHERE employee_id = ?;";
 		try {
-			numberOfRows = jdbcTemplate.update(sql, employeeId);
+			jdbcTemplate.update(sql, employeeId);
+			numberOfRows = jdbcTemplate.update(sql2, employeeId);
+
 		} catch (CannotGetJdbcConnectionException e) {
 			throw new DaoException("Unable to connect to server or database", e);
 		} catch (DataIntegrityViolationException e) {
@@ -162,9 +171,12 @@ public class JdbcEmployeeDao implements EmployeeDao {
 	@Override
 	public int deleteEmployeesByDepartmentId(int departmentId) {
 		int numberOfRows = 0;
-		String sql = "DELETE FROM employee WHERE department_id = ?;";
+		String sql = "DELETE FROM project_employee WHERE employee_id IN (SELECT employee_id FROM employee WHERE department_id = ?);";
+		String sql2 = "DELETE FROM employee WHERE department_id = ?;";
+
 		try {
-			numberOfRows = jdbcTemplate.update(sql, departmentId);
+			jdbcTemplate.update(sql, departmentId);
+			numberOfRows = jdbcTemplate.update(sql2, departmentId);
 		} catch (CannotGetJdbcConnectionException e) {
 			throw new DaoException("Unable to connect to server or database", e);
 		} catch (DataIntegrityViolationException e) {
