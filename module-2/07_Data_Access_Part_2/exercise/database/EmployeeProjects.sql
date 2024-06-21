@@ -88,3 +88,7 @@ INSERT INTO project_employee (project_id, employee_id) VALUES (6, 10);
 INSERT INTO project_employee (project_id, employee_id) VALUES (6, 11);
 
 COMMIT;
+
+
+SELECT * FROM project_employee
+
