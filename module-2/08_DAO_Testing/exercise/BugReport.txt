@@ -1,43 +1,47 @@
 Bug 1
 -----
 Test that demonstrates problem:
+   getTimesheetsByEmployeeId_with_valid_employee_id_returns_list_of_timesheets_for_employee method
+
+
 
 Expected output:
-
+2
 Actual output:
-
+1
 How did you fix this bug?
-
+on line 50, method was using a if statement instead of a while loop.
 
 Bug 2
 -----
 Test that demonstrates problem:
-
+getTimesheetsByProjectId_with_valid_project_id_returns_list_of_all_timesheets_for_project()
 Expected output:
-
+3
 Actual output:
-
+2
 How did you fix this bug?
-
+sql code switch to project id not employee id
 
 Bug 3
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: getbillablehours
 
-Expected output:
+Expected output: 1
 
-Actual output:
+Actual output: 2.5
 
-How did you fix this bug?
+How did you fix this bug? Sql was using SUM, So you need to take it out to just get the hours worked.
 
 
 Bug 4
 -----
 Test that demonstrates problem:
+Billable method
 
-Expected output:
+Expected output: billing timesheets that are billable.
 
-Actual output:
+Actual output: billing every timesheet.
 
 How did you fix this bug?
-
+updated interface and timesheetDao, by accounting for the boolean (billable), to see if the timesheets were billable.
