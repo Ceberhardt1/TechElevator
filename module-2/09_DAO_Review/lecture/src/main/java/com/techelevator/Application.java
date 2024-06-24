@@ -1,6 +1,8 @@
 package com.techelevator;
 
 
+import com.techelevator.dao.JDBCMenuItemItemDAO;
+import com.techelevator.dao.MenuItemDAO;
 import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
 import java.util.Scanner;
@@ -8,6 +10,8 @@ import java.util.Scanner;
 public class Application {
 
     private final Scanner userInput = new Scanner(System.in);
+
+    private MenuItemDAO menuItemDAO; //1 defining the variable
 
 
     public static void main(String[] args) {
@@ -22,6 +26,7 @@ public class Application {
 
     public Application(DataSource dataSource) {
         //todo: do DAO stuff
+        menuItemDAO = new JDBCMenuItemItemDAO(dataSource); //2 instantiating the dao and passing it the the data source
 
     }
 
