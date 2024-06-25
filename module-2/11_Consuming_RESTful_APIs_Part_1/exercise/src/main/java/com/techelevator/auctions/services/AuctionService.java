@@ -11,7 +11,8 @@ public class AuctionService {
 
 
     public Auction[] getAllAuctions() {
-        // call api here
+        String url = API_BASE_URL;
+        restTemplate.acceptHeaderRequestCallback()
         return null;
     }
 
