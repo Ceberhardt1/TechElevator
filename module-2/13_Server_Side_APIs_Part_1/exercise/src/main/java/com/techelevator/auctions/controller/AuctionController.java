@@ -20,9 +20,21 @@ public class AuctionController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Auction> list(){
+    public List<Auction> list(@RequestParam(value = "?title_like", defaultValue = "") String title_like, @RequestParam(value = "?currentBid_lte=", defaultValue = "0") double currentBid_lte){
+
+        if (!title_like.equals("")) {
+            return auctionDao.getAuctionsByTitle(title_like);
+        }
+        if (currentBid_lte >= 0) {
+            return auctionDao.getAuctionsByMaxBid(currentBid_lte);
+        }
+
+
+
+
         return auctionDao.getAuctions();
     }
+
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Auction get(@PathVariable int id) {
