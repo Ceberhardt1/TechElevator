@@ -5,6 +5,7 @@ import com.techelevator.auctions.dao.MemoryAuctionDao;
 import com.techelevator.auctions.exception.DaoException;
 import com.techelevator.auctions.model.Auction;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,7 +34,7 @@ public class AuctionController {
 
         return auctionDao.getAuctions();
     }
-
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Auction get(@PathVariable int id) {
         Auction auction = auctionDao.getAuctionById(id);
@@ -45,11 +46,12 @@ public class AuctionController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyAuthority('ROLE_CREATOR','ROLE_ADMIN')")
     @RequestMapping(path = "", method = RequestMethod.POST)
     public Auction create(@Valid @RequestBody Auction auction) {
         return auctionDao.createAuction(auction);
     }
-
+    @PreAuthorize("hasAnyAuthority('ROLE_CREATOR', 'ROLE_ADMIN')")
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public Auction update(@Valid @RequestBody Auction auction, @PathVariable int id) {
         // The id on the path takes precedence over the id in the request body, if any
@@ -61,13 +63,13 @@ public class AuctionController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Auction Not Found");
         }
     }
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable int id) {
         auctionDao.deleteAuctionById(id);
     }
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(path = "/whoami")
     public String whoAmI() {
         return "";
