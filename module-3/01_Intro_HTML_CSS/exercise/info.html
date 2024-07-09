@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="styleSheet" href="info.css"/>
+
 </head>
 <body>
-    
+    <form action="/" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br/> <br/>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br/> <br/>
+        <label for="date-of-birth">Date of Birth:</label>
+        <input type="date" id="date-of-brith" name="date-of-birth">
+        <br/> <br/>
+        <label for="favorite-color">Favorite Color:</label>
+        <input type="text" id="favorite-color" name="favorite-color">
+        <br/> <br/>
+        <label for="lucky-number">Lucky Number:</label>
+        <input type="number" id="lucky-number" name="lucky-number">
+        <br/><br/>
+        <label for="confirmation">Confirmation</label>
+        <input type="checkbox" id="confirmation" name="confirmation">
+        <br/><br/>
+        <input type="submit" value="submit">
+    </form>   
 </body>
 </html>
