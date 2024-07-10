@@ -19,3 +19,72 @@ ul {
   margin: 0;
   padding: 0;
 }
+aside{
+  border: 1px solid  rgba(0, 173, 238, 0.4);
+  position: fixed;
+  width: 200px;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  
+  
+  
+}
+aside img{
+  width: 120px;
+  display: block;
+  margin: auto;
+  
+}
+main{
+  margin-left: 220px;
+  margin-right: 20px;
+  
+}
+
+li a{
+  width: 50%;
+  color: #00ADEE;
+  list-style: none;
+  text-decoration: none;
+  
+  
+  
+  
+}
+li:first-of-type {
+  text-decoration: underline;
+  color: rgba(0, 173, 238, 0.4);
+}
+li{
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding-bottom: 25px;
+  list-style: none;
+  
+}
+li {
+  border-bottom: 2px solid rgba(0,173,238,0.4);
+  padding: 20px;
+  
+  
+}
+header img{
+  height: 100px;
+  padding-bottom: 25px;
+}
+section{
+  display: flex;
+  
+}
+#what-we-do, #our-work, #contact-us{
+  border-right: 2px solid rgba(170, 239, 135, 0.8);
+  padding: 20px;
+  
+}
+#what-we-do h2, #our-work h2, #contact-us h2{
+  color: #8CC36F;
+}
