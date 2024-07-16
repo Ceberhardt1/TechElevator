@@ -122,7 +122,7 @@ or false otherwise.
 				return cigars >= 40;
 			}
 			else{
-				return ciagrs >= 40 && cigars <= 60;
+				return cigars >= 40 && cigars <= 60;
 			}
 		}
 
@@ -205,6 +205,17 @@ parameter, `x` passed in.
 	filterMultiplesOfX([3, 5, 1, 9, 18, 21, 42, 67], 3) → [3, 9, 18, 21, 42]
 	filterMultiplesOfX([3, 5, 10, 20, 18, 21, 42, 67], 5) → [5, 10, 20]
 */
+		function filterMultiplesOfX(arr, x){
+			const multiples = [];
+
+			for(let i = 0; i < arr.length; i++){
+				if(arr[i] % x === 0){
+					multiples.push(arr[i]);
+				}
+			}
+			return multiples;
+		}
+
 
 /*
 12. **createObject** Write a function that creates an object with a property called 
