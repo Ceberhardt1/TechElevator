@@ -5,13 +5,14 @@
 		sumDouble(1, 2) → 3
 		sumDouble(3, 2) → 5
 		sumDouble(2, 2) → 8
-
+*/
 		function sumDouble(x, y) {
-			// do logic here
-			// return result;
+			
 			return x + y;
         }
-*/
+		console.log(sumDouble(3,5));
+		console.log(sumDouble(4,4));
+
 
 /*
 2. **hasTeen** We'll say that a number is "teen" if it is in the range 13..19 inclusive. 
@@ -21,7 +22,10 @@
 		hasTeen(20, 19, 10) → true
 		hasTeen(20, 10, 13) → true
 */
-
+		function hasTeen(a, b, c){
+			return (a >= 13 && a <= 19 ) || (b >= 13 && b <= 19)|| (c >= 13 && c <= 19);
+		}
+		
 /* 
 3. **lastDigit** Given two non-negative int values, return true if they have the same 
     last digit, such as with 27 and 57.
@@ -30,6 +34,17 @@
 		lastDigit(6, 17) → false
 		lastDigit(3, 113) → true
 */
+		function lastDigit(a, b){
+			const lastA = a % 10;
+			const lastB = b % 10;
+
+			if(lastA === lastB){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
 
 /*
 4. **seeColor** Given a string, if the string begins with "red" or "blue" return that color 
@@ -39,6 +54,17 @@
 		seeColor("xxred") → ""
         seeColor("blueTimes") → "blue"
 */
+		function seeColor(str){
+			if(str.startsWith("red")){
+				return "red";
+			}
+			else if(str.startsWith("blue")){
+				return "blue";
+			}
+			else{
+				return "";
+			}
+		}
 
 /*
 5. **oddOnly** Write a function that given an array of integer of any length, removes
@@ -47,6 +73,17 @@
 		oddOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) → [1, 3, 5, 7, 9, 11];
 		oddOnly([2, 4, 8, 32, 256]); → []
 */
+		function oddOnly(arr){
+			const result = [];
+
+			for(let i = 0; i < arr.length; i++){
+				if(arr[i] % 2 !== 0){
+					result.push(arr[i]);
+				}
+			}
+			
+			return result;
+		}
 
 /*
 6. **frontAgain** Given a string, return true if the first 2 chars in the string also appear 
@@ -56,6 +93,18 @@
 		frontAgain("edit") → false
 		frontAgain("ed") → true
 */
+
+		function frontAgain(str){
+			if(str.length >= 2){
+				const font = str.substring(0,2);
+				const end = str.substring(str.length - 2);
+
+				return font === end;
+			}
+			else{
+				return false;
+			}
+		}
 
 /*
 7. **cigarParty** When squirrels get together for a party, they like to have cigars. 
@@ -68,6 +117,15 @@ or false otherwise.
 		cigarParty(50, false) → true
 		cigarParty(70, true) → true
 */
+		function cigarParty(cigars, isWeekend){
+			if(isWeekend){
+				return cigars >= 40;
+			}
+			else{
+				return ciagrs >= 40 && cigars <= 60;
+			}
+		}
+
 
 /*
 8. **fizzBuzz** Given a number, return a value according to the following rules:
@@ -82,6 +140,21 @@ In all other cases return the original number.
 	fizzBuzz(15) → "FizzBuzz"
 	fizzBuzz(8) → 8
 */
+		function fizzBuzz(num){
+			if(num % 3 === 0 && num % 5 === 0){
+				return "FizzBuzz";
+			
+			}
+			else if(num % 3 === 0){
+				return "Fizz";
+			}
+			else if(num % 5 === 0 ){
+				return "Buzz";
+			}
+			else{
+				return num;
+			}
+		}
 
 /*
 9. **filterEvens** Write a function that filters an array to only include even numbers.
@@ -91,6 +164,17 @@ In all other cases return the original number.
 	filterEvens([2, 4, 6]) → [2, 4, 6]
 	filterEvens([100, 8, 21, 24, 62, 9, 7]) → [100, 8, 24, 62]
 */
+		function filterEvens(arr){
+			const evens = [];
+
+			for(let i = 0; i < arr.length; i++){
+				if(arr[i] % 2 === 0){
+					evens.push(arr[i]);
+				}
+			}
+			return evens;
+
+		}
 
 /*
 10. **filterBigNumbers** Write a function that filters numbers greater than or equal to 100.
@@ -98,7 +182,21 @@ In all other cases return the original number.
 	filterBigNumbers([7, 10, 121, 100, 24, 162, 200]) → [121, 100, 162, 200]
 	filterBigNumbers([3, 2, 7, 1, -100, -120]) → []
 	filterBigNumbers([]) → []
+
 */
+
+		function filterBigNumbers(arr){
+			const bigNumbers = [];
+
+		for(let i = 0; i < arr.length; i++){
+			if(arr[i] >= 100){
+				bigNumbers.push(arr[i]);
+			}
+			return bigNumbers;
+		}
+		}
+		
+
 
 /*
 11. **filterMultiplesOfX** Write a function to filter numbers that are a multiple of a 
