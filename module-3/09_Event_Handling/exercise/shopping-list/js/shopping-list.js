@@ -36,3 +36,32 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  setPageTitle();
+  displayGroceries();
+
+  const items = document.querySelectorAll('li');
+
+  items.forEach((item) => {
+    item.addEventListener('click', () => {
+      if (!item.classList.contains('completed')) {
+        item.classList.add('completed');
+        item.querySelector('i').classList.add('completed');
+      }
+    });
+
+    item.addEventListener('dblclick', () => {
+      if (item.classList.contains('completed')) {
+        item.classList.remove('completed');
+        item.querySelector('i').classList.remove('completed');
+      }
+    });
+  });
+  
+
+  
+})
+
+
