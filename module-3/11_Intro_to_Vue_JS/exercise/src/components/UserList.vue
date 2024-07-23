@@ -24,13 +24,13 @@
         </td>
       </tr>
       <!-- user listing goes here -->
-      <tr v-for="user in filterList" v-bind:key="user.username" v-bind:class="{'inactive' : user.status == 'Inactive'}">
+      <tr v-for="usr in filteredList" v-bind:key="usr.username" v-bind:class="{'inactive' : usr.status == 'Inactive'}">
         
-        <td>{{ user.firstName }}</td>
-        <td>{{ user.lastName }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.emailAddress }}</td>
-        <td>{{ user.status }}</td>
+        <td>{{ usr.firstName }}</td>
+        <td>{{ usr.lastName }}</td>
+        <td>{{ usr.username }}</td>
+        <td>{{ usr.emailAddress }}</td>
+        <td>{{ usr.status }}</td>
       </tr>
       
     </tbody>
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    filterList(){
+    filteredList(){
       return this.users.filter((user) => {
         const firstNameMatch = user.firstName.toLowerCase().includes(this.search.firstName.toLowerCase());
         const lastNameMatch = user.lastName.toLowerCase().includes(this.search.lastName.toLowerCase());
@@ -67,12 +67,9 @@ export default {
         const EmailMatch = user.emailAddress.toLowerCase().includes(this.search.emailAddress.toLowerCase());
         const statusMatch = user.status.includes(this.search.status);
         return firstNameMatch && lastNameMatch && userNameMatch && EmailMatch && statusMatch;
-
-      })
-    }
-      
+      });
+    },
   }
-
 }
 </script>
 
