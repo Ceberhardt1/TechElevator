@@ -24,7 +24,8 @@
         </td>
       </tr>
       <!-- user listing goes here -->
-      <tr v-for="user in filterList" v-bind:key= "user.name">
+      <tr v-for="user in filterList" v-bind:key="user.username" v-bind:class="{'inactive' : user.status == 'Inactive'}">
+        
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.username }}</td>
@@ -40,6 +41,13 @@
 export default {
   data() {
     return {
+      search: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        emailAddress: '',
+        status: ''
+      },
       users: [
         { firstName: 'John', lastName: 'Smith', username: 'jsmith', emailAddress: 'jsmith@gmail.com', status: 'Active' },
         { firstName: 'Anna', lastName: 'Bell', username: 'abell', emailAddress: 'abell@yahoo.com', status: 'Active' },
@@ -47,14 +55,7 @@ export default {
         { firstName: 'Ben', lastName: 'Carter', username: 'bcarter', emailAddress: 'bcarter@gmail.com', status: 'Active' },
         { firstName: 'Katie', lastName: 'Jackson', username: 'kjackson', emailAddress: 'kjackson@yahoo.com', status: 'Active' },
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
-      ],
-      search: {
-        firstName: '',
-        lastName: '',
-        username: '',
-        emailAddress: '',
-        status: ''
-      }
+      ]
     }
   },
   computed: {
@@ -64,8 +65,8 @@ export default {
         const lastNameMatch = user.lastName.toLowerCase().includes(this.search.lastName.toLowerCase());
         const userNameMatch = user.username.toLowerCase().includes(this.search.username.toLowerCase());
         const EmailMatch = user.emailAddress.toLowerCase().includes(this.search.emailAddress.toLowerCase());
-        const status = user.status.includes(this.search.status);
-        return firstNameMatch && lastNameMatch && userNameMatch && EmailMatch && status;
+        const statusMatch = user.status.includes(this.search.status);
+        return firstNameMatch && lastNameMatch && userNameMatch && EmailMatch && statusMatch;
 
       })
     }
