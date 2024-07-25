@@ -176,7 +176,7 @@ export default {
     saveForm(){
       this.newUser.id = this.newUserId;
       this.users.unshift(this.newUser);
-    },
+    }
 
   },
   computed: {
