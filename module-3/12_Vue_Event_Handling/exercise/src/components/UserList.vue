@@ -64,24 +64,24 @@
       <button>Delete Users</button>
     </div>
 
-    <button>Add New User</button>
+    <button v-on:click="toggleForm">Add New User</button>
 
-    <form id="frmAddNewUser">
+    <form id="frmAddNewUser" v-show="formState" v-on:submit.prevent= "saveForm">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" />
+        <input type="text" id="firstName" name="firstName" v-model="newUser.firstName" />
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" />
+        <input type="text" id="lastName" name="lastName" v-model="newUser.lastName" />
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" />
+        <input type="text" id="username" name="username" v-model="newUser.username" />
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" id="emailAddress" name="emailAddress" />
+        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress" />
       </div>
       <button type="submit" class="btn save">Save User</button>
     </form>
@@ -92,6 +92,9 @@
 export default {
   data() {
     return {
+
+      formState: false,
+
       filter: {
         firstName: "",
         lastName: "",
@@ -157,13 +160,24 @@ export default {
           emailAddress: "msmith@foo.com",
           status: "Inactive"
         }
-      ]
+      ],
     };
   },
   methods: {
     getNextUserId() {
       return this.nextUserId++;
-    }
+    },
+
+    toggleForm(){
+      console.log('Hello')
+      this.formState = !this.formState;
+    },
+
+    saveForm(){
+      this.newUser.id = this.newUserId;
+      this.users.unshift(this.newUser);
+    },
+
   },
   computed: {
     filteredList() {
