@@ -13,13 +13,26 @@
 export default {
   data() {
     return {
-      book: {}
+      book: {
+      title: '',
+      author: '',
+      isbn: '',
+      numPages: '',
+      moreInfoLink: ''
+      }
     }
   },
   methods: {
     saveBook() {
       this.$store.commit('SAVE_BOOK', this.book);
-      this.book = {};
+      this.book = {
+        title: '',
+        author: '',
+        isbn: '',
+        numPages: '',
+        moreInfoLink: ''
+      };
+      this.$router.push('/myBooks');
     }
   }
 }
