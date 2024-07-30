@@ -28,6 +28,8 @@ export default {
 
       // TODO - Get data from API and set `topics` property
 
+      
+
     },
   },
   created() {
