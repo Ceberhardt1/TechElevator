@@ -6,12 +6,13 @@
     <header class="flex">
       <h1>Topics</h1>
     </header>
-    <topic-list v-bind:topics="topics"/>
+    <topic-list v-bind:topics="topics" />
   </div>
 </template>
 
 <script>
 import TopicList from '../components/TopicList.vue';
+import TopicService from '../services/TopicService'
 
 export default {
   components: {
@@ -24,12 +25,11 @@ export default {
     };
   },
   methods: {
-    getTopics() {
-
-      // TODO - Get data from API and set `topics` property
-
-      
-
+    getTopics(id) {
+        TopicService.getTopics(id).then(response => {
+          this.topics = response.data;
+          this.isLoading = false;
+        });
     },
   },
   created() {
@@ -38,5 +38,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
