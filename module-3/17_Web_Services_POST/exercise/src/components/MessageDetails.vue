@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import messageService from '../services/MessageService';
+import MessageService from '../services/MessageService';
+import messageService from '../services/MessageService'
 export default {
   props: {
     message: { type: Object, required: true }
@@ -36,7 +37,24 @@ export default {
   methods: {
     deleteMessage() {
       if (confirm("Are you sure you want to delete this message? This action cannot be undone.")) {
-        
+        messageService
+        .deleteMessage(this.message)
+        .then(response => {
+          if(response.status === 200){
+            this.$store.commit(
+              'SET_NOTIFICATION',
+              {
+                message: `Message ${this.message.id} was successfully deleted.`,
+                type: 'success'
+
+              }
+            );
+            this.$router.push({name: "TopicDetailsView", params: {id: this.message.id }});
+          }
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, 'deleting')
+        });
         // TODO - Do a delete, then navigate to Topic Details on success
         // For errors, call handleErrorResponse
 

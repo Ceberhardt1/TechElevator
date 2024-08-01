@@ -18,8 +18,9 @@
 </template>
 
 <script>
-import topicService from '../services/TopicService.js';
 import MessageSummary from '../components/MessageSummary.vue';
+import TopicForm from './TopicForm.vue';
+import TopicService from '../services/TopicService.js';
 
 export default {
   components: {
@@ -44,9 +45,24 @@ export default {
   methods: {
     deleteTopic() {
       if (confirm("Are you sure you want to delete this topic and all associated messages? This action cannot be undone.")) {
-        
+        TopicService
+        .deleteTopic(this.topic)
+        .then(response => {
+          if(response.status === 200){
+            this.$store.commit(
+              'SET_NOTIFICATION',
+              {
+                message: `Topic ${this.topic.id} was successfully deleted.`,
+                type: 'success'
+
+              }
+            );
+            this.$router.push({name: "HomeView", params: {id: this.topic.id }});
+          }
+        })
         // TODO - Do a delete, then navigate Home on success
         // For errors, call handleErrorResponse
+
         
       }
     },

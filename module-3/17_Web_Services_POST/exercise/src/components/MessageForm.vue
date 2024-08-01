@@ -6,7 +6,7 @@
     </div>
     <div class="field">
       <label for="messageText">Message</label>
-      <textarea id="messageText" name="messageText" v-model="editMessage.messageText" />
+      <textarea id="messageText" name="messageText" v-model="editMessage.messageText"></textarea>
     </div>
     <div class="actions">
       <button class="btn-submit" type="submit">Submit</button>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import messageService from '../services/MessageService';
+import MessageService from '../services/MessageService';
 
 export default {
   props: {
@@ -47,12 +47,28 @@ export default {
       }
       // Check for add or edit
       if (this.editMessage.id === 0) {
-        
+        MessageService
+        .addMessage(this.editMessage)
+        .then((response) => {
+          this.$router.push({name: 'TopicDetailsView'})
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, 'adding')
+        });
         // TODO - Do an add, then navigate Home on success.
         // For errors, call handleErrorResponse
 
       } else {
-        
+        MessageService
+        .updateMessage(this.editMessage)
+        .then((response) => {
+          if(response.status === 200){
+            this.$router.push({name: 'MessageDetailsView', params: {id: this.editMessage.id}})
+          }
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, 'updating')
+        });
         // TODO - Do an edit, then navigate back to Message Details on success
         // For errors, call handleErrorResponse
 
