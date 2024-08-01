@@ -44,7 +44,7 @@
           v-bind:class="{ deactivated: user.status === 'Inactive' }"
         >
           <td>
-            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" />
+            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" v-bind:checked="selectedUserIds.includes(user.id)" v-on:change="toggleUserIdSelection(user)" />
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -52,36 +52,36 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnActivateDeactivate">Activate or Deactivate</button>
+            <button class="btnActivateDeactivate" v-on:click="toggleActivity(user)">{{ activeButtonText(user) }}</button>
           </td>
         </tr>
       </tbody>
     </table>
 
     <div class="all-actions">
-      <button>Activate Users</button>
-      <button>Deactivate Users</button>
-      <button>Delete Users</button>
+      <button v-if="selectedUserIds.length > 0" v-on:click="activateUsers">Activate Users</button>
+      <button v-if="selectedUserIds.length > 0" v-on:click="deactivateUsers">Deactivate Users</button>
+      <button v-if="selectedUserIds.length > 0" v-on:click="deleteUser">Delete Users</button>
     </div>
 
-    <button v-on:click="toggleForm">Add New User</button>
+    <button v-on:click="displaySection">Add New User</button>
 
-    <form id="frmAddNewUser" v-show="formState" v-on:submit.prevent= "saveForm">
+    <form id="frmAddNewUser" v-on:submit.prevent="addNewUser" v-show="toggleDisplay === true">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" v-model="newUser.firstName" />
+        <input type="text" id="firstName" name="firstName" v-model="newUser.firstName" required/>
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" v-model="newUser.lastName" />
+        <input type="text" id="lastName" name="lastName" v-model="newUser.lastName" required/>
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" v-model="newUser.username" />
+        <input type="text" id="username" name="username" v-model="newUser.username" required/>
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress" />
+        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress" required/>
       </div>
       <button type="submit" class="btn save">Save User</button>
     </form>
@@ -92,9 +92,8 @@
 export default {
   data() {
     return {
-
-      formState: false,
-
+      toggleDisplay: false,
+      selectedUserIds: [],
       filter: {
         firstName: "",
         lastName: "",
@@ -160,24 +159,75 @@ export default {
           emailAddress: "msmith@foo.com",
           status: "Inactive"
         }
-      ],
+      ]
     };
   },
   methods: {
     getNextUserId() {
       return this.nextUserId++;
     },
-
-    toggleForm(){
-      console.log('Hello')
-      this.formState = !this.formState;
-    },
-
-    saveForm(){
-      this.newUser.id = this.newUserId;
+    addNewUser() {
+      this.newUser.id = this.getNextUserId();
       this.users.unshift(this.newUser);
+      this.newUser = {};
+    },
+    displaySection() {
+      if (this.toggleDisplay === false) {
+        this.toggleDisplay = true;
+      }
+      else {
+        this.newUser = {};
+        this.toggleDisplay = false;
+      }
+    },
+    activeButtonText(user) {
+      if(user.status === "Inactive") {
+        return "Activate";
+      }
+      else {
+        return "Deactivate";
+      }
+    },
+    toggleActivity(user) {
+      if(user.status === "Inactive") {
+        user.status = "Active"
+        
+      }
+      else {
+        user.status = "Inactive"
+      }
+    },
+    toggleUserIdSelection(user) {
+      if(this.selectedUserIds.includes(user.id)) {
+        this.selectedUserIds = this.selectedUserIds.filter(id => id !== user.id);
+      }
+      else {
+        this.selectedUserIds.push(user.id);
+      }
+    },
+    activateUsers() {
+        this.users.forEach(user => {
+          if(this.selectedUserIds.includes(user.id)) {
+            user.status = 'Active';
+            
+          }
+        });
+        this.selectedUserIds = [];
+      
+    },
+    deactivateUsers() {
+      this.users.forEach(user => {
+        if(this.selectedUserIds.includes(user.id)) {
+          user.status = 'Inactive'
+          
+        }
+      });
+      this.selectedUserIds = [];
+    },
+    deleteUser() {
+      this.users = this.users.filter(user => !this.selectedUserIds.includes(user.id));
+      this.selectedUserIds = [];
     }
-
   },
   computed: {
     filteredList() {
